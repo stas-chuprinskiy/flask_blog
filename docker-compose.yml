@@ -1,0 +1,24 @@
+version: '3.1'
+
+volumes:
+  flask_blog_db:
+
+services:
+  db:
+    image: mysql:8-debian
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    volumes:
+      - flask_blog_db:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
